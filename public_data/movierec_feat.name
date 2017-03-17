@@ -1,0 +1,54 @@
+user_id
+movie_id
+age_-18
+age_18-24
+age_25-34
+age_35-44
+age_45-49
+age_50-55
+age_56+
+job_other
+job_academic/educator
+job_artist
+job_clerical/admin
+job_college/grad student
+job_customer service
+job_doctor/health care
+job_executive/managerial
+job_farmer
+job_homemaker
+job_K-12 student
+job_lawyer
+job_programmer
+job_retired
+job_sales/marketing
+job_scientist
+job_self-employed
+job_technician/engineer
+job_tradesman/craftsman
+job_unemployed
+job_writer
+gender_M
+gender_F
+movie_genre_Action
+movie_genre_Adventure
+movie_genre_Animation
+movie_genre_Childrens
+movie_genre_Comedy
+movie_genre_Crime
+movie_genre_Documentary
+movie_genre_Drama
+movie_genre_Fantasy
+movie_genre_Film-Noir
+movie_genre_Horror
+movie_genre_Musical
+movie_genre_Mystery
+movie_genre_Romance
+movie_genre_Sci-Fi
+movie_genre_Thriller
+movie_genre_War
+movie_genre_Western
+compatibility_vector
+user_average_rating
+movie_average_rating
+constant_1
