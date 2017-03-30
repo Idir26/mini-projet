@@ -1,34 +1,30 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
+from regressor import Regressor
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import cross_val_score
+from data_manager import DataManager
 
-from DataManager import DataManager
-from Regressor import Regressor
-from sklearn.metrics import accuracy_score 
-#from sklearn.model_selection import cross_val_score
+
+
 
 input_dir = "../public_data"
 output_dir = "../res"
-
 basename = 'movierec'
+
 D = DataManager(basename, input_dir) # Load data
 print D
-
 myRegressor = Regressor()
- 
-# Train
-Ytrue_tr = D.data['Y_train']
-myRegressor.fit(D.data['X_train'], Ytrue_tr)
 
-# Making predictions
-Ypred_tr = myRegressor.predict(D.data['X_train'])
-Ypred_va = myRegressor.predict(D.data['X_valid'])
-Ypred_te = myRegressor.predict(D.data['X_test'])  
+Ytraint = D.data['Y_train']
+myRegressor.fit(D.data['X_train'], Ytraint)
 
-# We can compute the training success rate 
-acc_tr = accuracy_score(Ytrue_tr, Ypred_tr)
-# But it might be optimistic compared to the validation and test accuracy
-# that we cannot compute (except by making submissions to Codalab)
-# So, we can use cross-validation:
-#acc_cv = cross_val_score(myRegressor, D.data['X_train'], Ytrue_tr, cv=5, scoring='accuracy')
+Ytrain_pred = myRegressor.predict(D.data['X_train'])
+Yvalid_pred = myRegressor.predict(D.data['X_valid'])
+Ytest_pred = myRegressor.predict(D.data['X_test'])
+train_acc = accuracy_score(Ytrue_tr, Ypred_tr)
+
+scores = cross_val_score(myRegressor, D.data['X_train'], Ytraint, cv=5)
+
+#Le score moyen et l'intervalle de confiance à 95% sont donnés par :
+print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2
 
                                         
