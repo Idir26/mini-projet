@@ -3,18 +3,14 @@
 from outils import *
 from sys import argv
 from sklearn.base import BaseEstimator
-from DataManager import DataManager
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.preprocessing import Normalizer
-from sklearn.preprocessing import Binarizer
-
-
+from zDataManager import DataManager
+from sklearn.decomposition import PCA
 
 class Preprocessor:
 	def __init__(self):
 		self.table = []
 		self.categories = []
-		self.transformer = Binarizer();
+		self.transformer = PCA(n_components=2)
 	def importer_fichier(self,fichier):
 		f = open(fichier,"r")
 		chargement_categories = False
@@ -204,13 +200,13 @@ class Preprocessor:
 			for j in range(len(self.categories)):
 				somme[j] += ligne[j]
 		return somme  
-        def fit(self, X, y=None):
-                return self.transformer.fit(X, y)
+	def fit(self, X, y=None):
+		return self.transformer.fit(X, y)
 
-        def fit_transform(self, X, y=None):
-                return self.transformer.fit_transform(X)
+	def fit_transform(self, X, y=None):
+		return self.transformer.fit_transform(X)
 
-        def transform(self, X, y=None):
+	def transform(self, X, y=None):
 		return self.transformer.transform(X)		
 def main(args):
 	print "chargement du tableau..."
