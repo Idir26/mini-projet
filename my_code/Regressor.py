@@ -16,7 +16,7 @@ class Regressor(BaseEstimator):
 	def __init__(self):
          regressor = Pipeline([
                 ('preprocessing', Preprocessor()),
-                ('regression', DecisionTreeRegressor())])
+                ('regression', DecisionTreeRegressor())])#allows us to chain transformers and estimators together in such a way that we can use them as a single unit. 
          self.clf = regressor
 
 	def fit(self, X, y):
