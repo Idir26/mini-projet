@@ -1,42 +1,57 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-Created on Sat Mar 11 08:04:23 2017
 
-@author: isabelleguyon
+from mini_projet import *
 
-This is an example of program that tests the Iris challenge Preprocessor class.
-Another style is to incorporate the test as a main function in the Data manager class itself.
-"""
-from zDataManager import DataManager
-from zPreprocessor import Preprocessor
-input_dir = "../public_data"
-output_dir = "../res"
+print "chargement du tableau..."
+tableau_general = importer_fichier("mini projet matrice avec regroupement.csv")
+print "fait"
+def test_trier():
+	global tableau_general
+	a = copie(tableau_general)
+	trier(a)
+	afficher_resultats(a,50)
+	a = copie(tableau_general)
+	trier(a,2,1)
+	afficher_resultats(a,50)
+	a = copie(tableau_general)
+	trier(a,-1,-2)
+	afficher_resultats(a,50)
+def test_selection():
+	global tableau_general
+	a = selectionner(tableau_general,"user_id","age_18-24","movie_id","note")
+	trier(a,-2,1,3)
+	afficher_resultats(a,500)
+def test_distinguer():
+	global tableau_general
+	a = selectionner(tableau_general,"user_id","age_18-24","movie_id","note")
+	afficher_resultats(distinguer(a,-2,1),500)
+	b = distinguer(selectionner(a,"user_id"),1)
+	c = distinguer(selectionner(a,"movie_id"),1)
+	print "nombre de personnes:",len(b)-1
+	print "nombre de films:",len(c)-1
+def test_reduire():
+	global tableau_general
+	a = selectionner(tableau_general,"user_id","age_18-24","movie_id","note")
+	b = reduire(a,"age_18-24",'=',1)
+	afficher_resultats(b,50)
+	b = reduire(a,"age_18-24",'<>',1,"user_id",">=","movie_id")
+	afficher_resultats(b,50)
+	b = reduire(a,"user_id",'=',"movie_id")
+	afficher_resultats(b,50)
+	
+	
+	
 
-basename = 'Iris'
-D = DataManager(basename, input_dir) # Load data
-print("*** Original data ***")
-print D
 
-Prepro = Preprocessor()
- 
-# Preprocess on the data and load it back into D
-D.data['X_train'] = Prepro.fit_transform(D.data['X_train'], D.data['Y_train'])
-D.data['X_valid'] = Prepro.transform(D.data['X_valid'])
-D.data['X_test'] = Prepro.transform(D.data['X_test'])
-  
-# Here show something that proves that the preprocessing worked fine
-print("*** Transformed data ***")
-print D
 
-# Preprocessing gives you opportunities of visualization:
-# Scatter-plots of the 2 first principal components
-# Scatter plots of pairs of features that are most relevant
-import matplotlib.pyplot as plt
-X = D.data['X_train']
-Y = D.data['Y_train']
-plt.scatter(X[:, 0], X[:, 1], c=Y)
-plt.xlabel('PC1')
-plt.ylabel('PC2')
-plt.colorbar()
-plt.show()
+def main(args):
+	test_trier()
+	test_selection()
+	test_distinguer()
+	test_reduire()
+	return 0
+
+if __name__ == '__main__':
+    import sys
+    sys.exit(main(sys.argv))
