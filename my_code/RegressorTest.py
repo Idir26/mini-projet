@@ -20,7 +20,8 @@ myRegressor.fit(D.data['X_train'], Ytraint)
 Ytrain_pred = myRegressor.predict(D.data['X_train'])
 Yvalid_pred = myRegressor.predict(D.data['X_valid'])
 Ytest_pred = myRegressor.predict(D.data['X_test'])
-train_acc = accuracy_score(Ytrue_tr, Ypred_tr)
+
+train_acc = accuracy_score(Ytraint, Ypred_tr)
 
 scores = cross_val_score(myRegressor, D.data['X_train'], Ytraint, cv=5)
 
